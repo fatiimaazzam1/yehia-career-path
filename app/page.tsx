@@ -10,7 +10,7 @@ export default function HomePage() {
 
       <p>
         Yehia is a Computer Science graduate from the
-        Lebanese University. His goal is to find a job
+        Lebanese University, First Branch. His goal is to find a job
         within two months.
       </p>
 

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { opportunities } from "@/data/opportunities";
 
-// Type of the props provided by Next.js
+// Props provided by Next.js to this dynamic route
 type OpportunityDetailsPageProps = {
   params: Promise<{ id: string }>;
 };
@@ -11,25 +11,18 @@ type OpportunityDetailsPageProps = {
 export default async function OpportunityDetailsPage({
   params,
 }: OpportunityDetailsPageProps) {
-    
-    // params: An object containing the dynamic route parameters, in this case, the id of the opportunity.
-    //promise<{ id: string }>: Indicates that the params object is a Promise that resolves to an object with a single property id of type string. This is because Next.js may fetch the route parameters asynchronously.
-    //async function OpportunityDetailsPage: Defines an asynchronous React component that will render the details of a specific opportunity based on the id provided in the URL.
-    //await params: Waits for the params Promise to resolve, allowing the component to access the id of the opportunity from the URL.
 
-  
-  
-    // Step 1: Read the dynamic ID from the URL
+  // In Next.js 16, params is provided as a Promise.
+  // We use await to access the dynamic ID from the URL.
   const { id } = await params;
 
-  // Step 2: Find the matching opportunity
+  // Find the opportunity matching the ID.
+  // .find() is synchronous and returns undefined if no match exists.
   const opportunity = opportunities.find(
     (item) => item.id === id
   );
-  
-  //.find():searches through the opportunities array and returns the first opportunity object that has an id matching the id from the URL. If no match is found, it returns undefined.
 
-  // Step 3: Handle an unknown ID
+  // Handle an unknown opportunity ID
   if (!opportunity) {
     return (
       <main className="opportunity-detail-page">
@@ -54,7 +47,7 @@ export default async function OpportunityDetailsPage({
     );
   }
 
-  // Step 4: Display the matching opportunity
+  // Display the matching opportunity
   return (
     <main className="opportunity-detail-page">
 
@@ -96,7 +89,7 @@ export default async function OpportunityDetailsPage({
         </p>
 
         <Link href="/plan">
-          Review Career Plan 
+          Review Career Plan
         </Link>
       </section>
 
